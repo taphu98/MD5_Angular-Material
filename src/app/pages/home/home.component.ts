@@ -183,4 +183,8 @@ export class HomeComponent {
   // End: Required for demo purpose
   uploadAvatar($event: string) {
   }
+
+  onUploadMultiple($event: string[]) {
+    
+  }
 }
