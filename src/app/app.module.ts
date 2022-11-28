@@ -38,6 +38,8 @@ import { SingerAvatarComponent } from './upload/singer-avatar/singer-avatar.comp
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MultipleAvatarComponent } from './upload/multiple-avatar/multiple-avatar.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {AuthGuard} from './security/auth.guard';
+import { AdminManageComponent } from './profile/admin-manage/admin-manage.component';
 
 export const appRoutes: Routes = [
   { path: '', component: HomeComponent, data: { title: 'Home' } },
@@ -48,11 +50,11 @@ export const appRoutes: Routes = [
   },
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'profile', component: ProfileComponent}
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, GettingStartedComponent, RegisterComponent, LoginComponent, ProfileComponent, ParentInputComponent, ChildInputComponent, ParentOutputComponent, ChildOutputComponent, SingerAvatarComponent, MultipleAvatarComponent],
+  declarations: [AppComponent, HomeComponent, GettingStartedComponent, RegisterComponent, LoginComponent, ProfileComponent, ParentInputComponent, ChildInputComponent, ParentOutputComponent, ChildOutputComponent, SingerAvatarComponent, MultipleAvatarComponent, AdminManageComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
