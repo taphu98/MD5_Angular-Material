@@ -8,12 +8,16 @@ import {TokenService} from '../../service/token.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-
+  checkAdmin = false;
   constructor(private router: Router,
               private tokenService: TokenService) { }
 
   ngOnInit(): void {
     console.log('token --->', this.tokenService.getToken());
+    if (JSON.stringify(this.tokenService.getRole()) ===  JSON.stringify(['ADMIN'])){
+      this.checkAdmin = true;
+    }
+
   }
   logOut(){
     sessionStorage.clear();

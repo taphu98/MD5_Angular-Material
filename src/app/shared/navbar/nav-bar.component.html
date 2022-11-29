@@ -50,8 +50,10 @@
     <span>{{name}}</span>
     <mat-icon color="accent" matPrefix>add_reaction</mat-icon>
   </a>
-  <div class="flex-spacer"></div>
-    <img style="width: 50px; height: 50px; border-radius: 50%" src="{{avatar}}">
+
+  <div  class="flex-spacer"></div>
+
+    <a routerLink="profile/update/avatar"><img  *ngIf="checkLogin" style="width: 50px; height: 50px; border-radius: 50%" src="{{avatar}}"></a>
   <app-theme-picker></app-theme-picker>
   <a mat-button class="docs-button docs-navbar-hide-small" target="_blank" href="https://github.com/vmudigal/ngx-audio-player"
      aria-label="GitHub Repository">
@@ -59,6 +61,7 @@
          alt="">
     GitHub
   </a>
+
   <a mat-icon-button class="docs-button docs-navbar-show-small" href="https://github.com/vmudigal/ngx-audio-player"
      aria-label="GitHub Repository">
     <img class="docs-angular-logo" src="https://raw.githubusercontent.com/vmudigal/ngx-audio-player/master/src/assets/images/logos/angular/git  hub-circle-white-transparent.svg"

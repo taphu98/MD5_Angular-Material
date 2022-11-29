@@ -15,7 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { HomeComponent } from './pages/home/home.component';
 import { GettingStartedComponent } from './pages/gettingstarted/gettingstarted.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { NgxAudioPlayerModule } from 'projects/ngx-audio-player/src/public_api';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -40,6 +40,11 @@ import { MultipleAvatarComponent } from './upload/multiple-avatar/multiple-avata
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {AuthGuard} from './security/auth.guard';
 import { AdminManageComponent } from './profile/admin-manage/admin-manage.component';
+import {AuthInterceptor} from './service/auth.interceptor';
+import { UpdateAvatarComponent } from './profile/update-avatar/update-avatar.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog/dialog.component';
+import {AdminGuard} from './security/admin.guard';
 
 export const appRoutes: Routes = [
   { path: '', component: HomeComponent, data: { title: 'Home' } },
@@ -50,11 +55,16 @@ export const appRoutes: Routes = [
   },
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]}
+  {path: 'profile', component: ProfileComponent,canActivate: [AuthGuard],
+    children: [
+      {path: 'update/avatar',component: UpdateAvatarComponent},
+      {path: 'admin', component: AdminManageComponent, canActivate: [AdminGuard ]}
+    ],}
+
 ];
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, GettingStartedComponent, RegisterComponent, LoginComponent, ProfileComponent, ParentInputComponent, ChildInputComponent, ParentOutputComponent, ChildOutputComponent, SingerAvatarComponent, MultipleAvatarComponent, AdminManageComponent],
+  declarations: [AppComponent, HomeComponent, GettingStartedComponent, RegisterComponent, LoginComponent, ProfileComponent, ParentInputComponent, ChildInputComponent, ParentOutputComponent, ChildOutputComponent, SingerAvatarComponent, MultipleAvatarComponent, AdminManageComponent, UpdateAvatarComponent, DialogComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -63,6 +73,7 @@ export const appRoutes: Routes = [
     MatIconModule,
     MatRadioModule,
     MatCheckboxModule,
+    MatDialogModule,
     MatSlideToggleModule,
     MatButtonModule,
     MatInputModule,
@@ -73,7 +84,9 @@ export const appRoutes: Routes = [
     NgxAudioPlayerModule,
     RouterModule.forRoot(appRoutes, {useHash: false}), MatFormFieldModule, FormsModule, ReactiveFormsModule, MatProgressSpinnerModule, MatProgressBarModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

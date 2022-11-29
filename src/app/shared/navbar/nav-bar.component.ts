@@ -2,7 +2,7 @@ import {Component, NgModule, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
-import {RouterModule} from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 import {ThemePickerModule} from '../theme-picker';
 import {ThemeStorage} from '../theme-picker/theme-storage/theme-storage';
 import {StyleManager} from '../style-manager';
@@ -19,8 +19,8 @@ export class NavBarComponent implements OnInit{
   checkLogin = false;
   name: string;
   avatar: string;
-
-  constructor(private tokenService: TokenService) {
+  constructor(private tokenService: TokenService,
+              private router: Router) {
   }
   ngOnInit(): void {
   if(this.tokenService.getToken()){
@@ -28,6 +28,7 @@ export class NavBarComponent implements OnInit{
     this.name = this.tokenService.getName();
     this.avatar = this.tokenService.getAvatar();
   }
+
   }
 
 

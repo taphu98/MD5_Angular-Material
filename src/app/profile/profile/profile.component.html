@@ -3,9 +3,15 @@
         <div class="col-12" style="margin-top: 20px">
             <mat-card style="margin: 50px">
                 <h1>Welcome</h1>
-                <button matSuffix (click)="logOut()" mat-stroked-button color="primary" class="mat-button-toggle-group btn-outline-danger">Logout
+                <button matSuffix (click)="logOut()" mat-stroked-button color="primary"
+                        class="mat-button-toggle-group btn-outline-danger">Logout
                     <mat-icon color="primary">logout</mat-icon>
                 </button>
+                <button *ngIf="checkAdmin" matSuffix routerLink="admin" mat-stroked-button color="accent"
+                        class="mat-button-toggle-group btn-outline-danger">Admin manage
+                    <mat-icon color="primary">manage_accounts</mat-icon>
+                </button>
+                <router-outlet></router-outlet>
             </mat-card>
 
         </div>
