@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12" style="margin-top: 20px">
+            <mat-card style="margin: 50px 0">
+                <form class="create-category" #f="ngForm" (ngSubmit)="f.form.valid && ngSubmit()" novalidate>
+                    <mat-error class="alert alert-primary">{{status}}</mat-error>
+                    <mat-form-field style="width: 350px" appearance="outline">
+                        <mat-label>Name category:</mat-label>
+                        <input matInput name="nameCategory" [(ngModel)]="form.nameCategory" #nameCategory = "ngModel" required >
+                        <mat-icon color="accent" matSuffix>category</mat-icon>
+                        <mat-error *ngIf="nameCategory.hasError('required')">The category's name is required!</mat-error>
+                    </mat-form-field>
+                    <app-upload-category-avatar (giveURLtoCreate)="onUploadAvatar($event)"></app-upload-category-avatar>
+                </form>
+                <button mat-stroked-button color="accent" class="mat-button-toggle-group btn-outline-primary">Create Category
+                    <mat-icon color="accent" matSuffix>category</mat-icon>
+                </button>
+            </mat-card>
+        </div>
+    </div>
+</div>

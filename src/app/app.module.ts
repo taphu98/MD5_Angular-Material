@@ -45,6 +45,14 @@ import { UpdateAvatarComponent } from './profile/update-avatar/update-avatar.com
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog/dialog.component';
 import {AdminGuard} from './security/admin.guard';
+import { CreateCategoryComponent } from './content/categoryManage/create-category/create-category.component';
+import { ListCategoryComponent } from './content/categoryManage/list-category/list-category.component';
+import { PageCategoryComponent } from './content/categoryManage/page-category/page-category.component';
+import { UpdateCategoryComponent } from './content/categoryManage/update-category/update-category.component';
+import { UploadCategoryAvatarComponent } from './upload/upload-category-avatar/upload-category-avatar.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
+import { UploadFileComponent } from './upload/upload-file/upload-file.component';
 
 export const appRoutes: Routes = [
   { path: '', component: HomeComponent, data: { title: 'Home' } },
@@ -55,6 +63,10 @@ export const appRoutes: Routes = [
   },
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
+  { path: 'create-category', component: CreateCategoryComponent},
+  {path: 'page-category', component: PageCategoryComponent},
+  {path: 'update-category/:id',component: UpdateCategoryComponent},
+  {path: 'list-category',component: ListCategoryComponent},
   {path: 'profile', component: ProfileComponent,canActivate: [AuthGuard],
     children: [
       {path: 'update/avatar',component: UpdateAvatarComponent},
@@ -64,7 +76,7 @@ export const appRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, GettingStartedComponent, RegisterComponent, LoginComponent, ProfileComponent, ParentInputComponent, ChildInputComponent, ParentOutputComponent, ChildOutputComponent, SingerAvatarComponent, MultipleAvatarComponent, AdminManageComponent, UpdateAvatarComponent, DialogComponent],
+  declarations: [AppComponent, HomeComponent, GettingStartedComponent, RegisterComponent, LoginComponent, ProfileComponent, ParentInputComponent, ChildInputComponent, ParentOutputComponent, ChildOutputComponent, SingerAvatarComponent, MultipleAvatarComponent, AdminManageComponent, UpdateAvatarComponent, DialogComponent, CreateCategoryComponent, ListCategoryComponent, PageCategoryComponent, UpdateCategoryComponent, UploadCategoryAvatarComponent, UploadFileComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -82,7 +94,7 @@ export const appRoutes: Routes = [
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     NgxAudioPlayerModule,
-    RouterModule.forRoot(appRoutes, {useHash: false}), MatFormFieldModule, FormsModule, ReactiveFormsModule, MatProgressSpinnerModule, MatProgressBarModule
+    RouterModule.forRoot(appRoutes, {useHash: false}), MatFormFieldModule, FormsModule, ReactiveFormsModule, MatProgressSpinnerModule, MatProgressBarModule,MatPaginatorModule, MatDialogModule,MatTableModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
